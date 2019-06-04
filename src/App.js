@@ -1,26 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {PrivateRoute} from './helpers/PrivateRoute';
+import Info from './components/info';
+import SideMenu from './components/SideMenu';
+import Profile from './components/profile';
+import Login from './components/login';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+  getAdverts = async () => {
+    let headers = {'Content-Type': 'application/json', 'Authorization':  `Bearer `};
+    const apiUrl = await fetch('http://95.165.154.234:8000/adverts', {headers});
+    const data = await apiUrl.json();
+    console.log(data);
+  }
+
+  onReceiveToken(newToken){
+    this.setState({
+      token: newToken
+    });
+  }
+
+  render() {
+    let token = localStorage.getItem('token');
+    return (
+      <Router>
+      <SideMenu token = {token}>
+          <Switch>
+            <Route exact path="/" component={Info}/>
+            <PrivateRoute path="/profile/" component={(props) => <Profile{...props}setToken={this.onReceiveToken.bind(this)}/>}/>
+            <Route path='/login/' render={(props) => <Login{...props}setToken={this.onReceiveToken.bind(this)}/>}/>
+          </Switch>
+        </SideMenu>
+      </Router>
+    );
+  }
 }
 
 export default App;
