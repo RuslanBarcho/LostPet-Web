@@ -5,6 +5,7 @@ import Info from './components/info';
 import SideMenu from './components/SideMenu';
 import Profile from './components/profile';
 import Login from './components/login';
+import NotFound from './components/NotFound';
 
 class App extends React.Component {
   constructor(props){
@@ -33,6 +34,7 @@ class App extends React.Component {
             <Route exact path="/" component={Info}/>
             <PrivateRoute path="/profile/" component={(props) => <Profile{...props}setToken={this.onReceiveToken.bind(this)}/>}/>
             <Route path='/login/' render={(props) => <Login{...props}setToken={this.onReceiveToken.bind(this)}/>}/>
+            <Route component={NotFound} />
           </Switch>
         </SideMenu>
       </Router>
