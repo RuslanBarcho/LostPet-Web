@@ -50,8 +50,8 @@ code {
   align-content: stretch;
 }
 
-p{
-  margin: 5px;
+.sideButton{
+  margin: 8px;
   margin-bottom: 15px;
   text-align: center;
 }
@@ -61,9 +61,7 @@ ul{
   padding: 0px;
 }
 
-.vi-page {
-	margin-left: 20%;
-	margin-right: 20%;
+.vi-page-v2 {
   width: 100%;
 	float: none;
 }

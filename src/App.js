@@ -3,20 +3,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {PrivateRoute} from './helpers/PrivateRoute';
 import Info from './components/info';
 import SideMenu from './components/SideMenu';
-import Profile from './components/profile';
-import Login from './components/login';
+import Profile from './components/Profile';
+import Login from './components/Login';
 import NotFound from './components/NotFound';
 
 class App extends React.Component {
   constructor(props){
     super(props);
-  }
-
-  getAdverts = async () => {
-    let headers = {'Content-Type': 'application/json', 'Authorization':  `Bearer `};
-    const apiUrl = await fetch('http://95.165.154.234:8000/adverts', {headers});
-    const data = await apiUrl.json();
-    console.log(data);
   }
 
   onReceiveToken(newToken){

@@ -29,7 +29,7 @@ class Profile extends React.Component {
     if (this.state.user != null) hasInfo = true;
     return (
       <div>
-        <h2>Profile</h2><br/>
+        <h2>Мой профиль</h2>
         {hasInfo ?
         <div style={{marginBottom: '10px'}}>{this.state.user.name}<br/></div>
         : <div style={{marginBottom: '10px'}}><CircularProgress/><br/></div>}

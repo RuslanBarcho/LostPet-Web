@@ -33,7 +33,7 @@ handleInputChange(event) {
 
 render(){
   return (
-   <div className="vi-page">
+   <div className="vi-page-v2">
       <div className="vi-100vh">
          <div className="vi-flex vi-column">
             <div className="vi-flex-v2 vi-column">
