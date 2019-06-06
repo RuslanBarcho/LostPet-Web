@@ -25,7 +25,7 @@ code {
   background-color: #F4AC5B;
   height: 100%;
   top: 0;
-  bottom: 0;
+  position: fixed;
 }
 
 .menuList{
@@ -34,7 +34,6 @@ code {
   justify-content: center;
   align-items: center;
   align-content: stretch;
-  position: relative;
 }
 
 .inputItem{
@@ -56,6 +55,29 @@ code {
   text-align: center;
 }
 
+.vi-card {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	position: relative;
+	margin: 25px;
+	width: 200px;
+	height: 200px;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	background: #FFFFFF;
+	box-shadow: 0px 4px 48px rgba(0, 0, 0, 0.20);
+	border-radius: 5px;
+  overflow: hidden;
+}
+
+.vi-center-crop {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 ul{
   list-style-type:none;
   padding: 0px;
@@ -64,6 +86,7 @@ ul{
 .vi-page-v2 {
   width: 100%;
 	float: none;
+  margin-left: 100px;
 }
 
 .test{
