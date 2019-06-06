@@ -17,7 +17,7 @@ class Profile extends React.Component {
 
   loadProfileData = async (token) =>{
     let headers = {'Content-Type': 'application/json', 'Authorization':  `Bearer ${token}`};
-    const response = await fetch('http://localhost:8000/user', {headers});
+    const response = await fetch('http://95.165.154.234:8000/user', {headers});
     const data = await response.json();
     if (data.name){
       this.setState({user: data});

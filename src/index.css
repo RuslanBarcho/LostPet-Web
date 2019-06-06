@@ -61,6 +61,7 @@ code {
 	flex-wrap: nowrap;
 	position: relative;
 	margin: 25px;
+  margin-bottom: 10px;
 	width: 200px;
 	height: 200px;
 	left: 0px;
