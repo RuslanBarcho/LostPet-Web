@@ -27,7 +27,7 @@ render(){
       {this.props.token ?
         <div className="appSidebar">
           <div className="menuList">
-            <p className='sideButton'><Fab color='secondary' aria-label="add" className="sideItem"><AddIcon /></Fab> </p>
+            <p className='sideButton'><Link to="/create"><Fab color='secondary' aria-label="add" className="sideItem"><AddIcon /></Fab></Link></p>
             <p className='sideButton'><Link to="/"><Button aria-label="add" className="sideItem"><ListIcon /></Button></Link></p>
             <p className='sideButton'><Link to="/profile"><Button aria-label="add" className="sideItem"><AccountIcon /></Button></Link></p>
           </div>
