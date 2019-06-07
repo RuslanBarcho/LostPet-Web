@@ -129,6 +129,14 @@ ul{
 	padding: 10px;
 }
 
+.vi-flex-left {
+	display: flex;
+	flex-wrap: wrap;
+	width: auto;
+	height: auto;
+  align-content: flex-start;
+}
+
 .vi-row {
 	flex-direction: row;
 }

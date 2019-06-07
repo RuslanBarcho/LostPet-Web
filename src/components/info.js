@@ -50,7 +50,7 @@ class Info extends React.Component {
     return (
       <div className="vi-page-v2">
         <h1 style={{paddingLeft:'15px'}}>Все объявления</h1>
-        <Paper style={{width:'400px', marginLeft:'15px'}} className='paper'>
+        <Paper style={{width:'320px', marginLeft:'15px'}} className='paper'>
           <IconButton className='iconButton' aria-label="Search" onClick={this.searchAdverts}>
             <SearchIcon />
           </IconButton>
