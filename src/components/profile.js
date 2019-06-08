@@ -28,7 +28,7 @@ class Profile extends React.Component {
     var hasInfo = false;
     if (this.state.user != null) hasInfo = true;
     return (
-      <div class='vi-page-v2'>
+      <div className='vi-page-v2'>
         <h2>Мой профиль</h2>
         {hasInfo ?
         <div style={{marginBottom: '10px'}}>{this.state.user.name}<br/></div>

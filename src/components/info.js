@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
+import { Link } from "react-router-dom";
 
 class Info extends React.Component {
 
@@ -49,19 +50,21 @@ class Info extends React.Component {
   render(){
     return (
       <div className="vi-page-v2">
-        <h1 style={{paddingLeft:'15px'}}>Все объявления</h1>
-        <Paper style={{width:'320px', marginLeft:'15px'}} className='paper'>
+        <h1 style={{paddingLeft:'20px'}}>Все объявления</h1>
+        <Paper style={{width:'320px', marginLeft:'20px'}} className='paper'>
           <IconButton className='iconButton' aria-label="Search" onClick={this.searchAdverts}>
             <SearchIcon />
           </IconButton>
           <InputBase className='input' name='searchQuery' onChange={e=>this.handleInputChange(e)} onKeyUp={e=>this.handleKeyPress(e)} placeholder="Поиск" />
         </Paper>
         {this.state.adverts ?
-          <Grid container justify="left" spacing='2'>
+          <Grid container>
             {this.state.adverts.map(value => (
               <div key={value._id}>
-              <div style={{backgroundImage: `url(${value.pictureURL[0]})`}} className="vi-card vi-column vi-center-crop"></div>
-              <p style={{marginLeft:'25px'}}>{value.advertTitle}</p>
+                <Link to={`/post/${value._id}`}>
+                  <div style={{backgroundImage: `url(${value.pictureURL[0]})`}} className="vi-card vi-column vi-center-crop"></div>
+                </Link>
+                <p style={{marginLeft:'25px'}}>{value.advertTitle}</p>
               </div>
             ))}
             </Grid>

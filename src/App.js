@@ -6,6 +6,7 @@ import SideMenu from './components/SideMenu';
 import Profile from './components/Profile';
 import Login from './components/Login';
 import Create from './components/Create';
+import Advert from './components/Advert';
 import NotFound from './components/NotFound';
 
 class App extends React.Component {
@@ -26,6 +27,7 @@ class App extends React.Component {
       <SideMenu token = {token}>
           <Switch>
             <Route exact path="/" component={Info}/>
+            <Route path='/post/:id' component={Advert}/>
             <PrivateRoute path="/profile/" component={(props) => <Profile{...props}setToken={this.onReceiveToken.bind(this)}/>}/>
             <PrivateRoute path='/create/' component={Create}/>
             <Route path='/login/' render={(props) => <Login{...props}setToken={this.onReceiveToken.bind(this)}/>}/>

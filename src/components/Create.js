@@ -22,6 +22,7 @@ class Create extends React.Component {
   }
 
   fileChangedHandler = event => {
+    this.setState({fileUrl:URL.createObjectURL(event.target.files[0])});
     this.setState({selectedFile: event.target.files[0]});
   }
 
@@ -68,6 +69,9 @@ class Create extends React.Component {
           <div className='vi-flex-left vi-column'>
             <input type="file" ref={(ref) => this.upload = ref} style={{ display: 'none' }} onChange={this.fileChangedHandler}/>
             <Button variant="contained" onClick={(e) => this.upload.click()} style={{width:'100px', height:'100px'}}><AddIcon/></Button>
+            {this.state.selectedFile ?
+              <div style={{backgroundImage: `url(${this.state.fileUrl})`}} className="vi-card-mini vi-center-crop"></div> :
+            null}
           </div>
         </div>
         <div className='vi-flex-left vi-row' style={{paddingLeft:'20px'}}>
