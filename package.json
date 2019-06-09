@@ -16,7 +16,8 @@
     "react-image-show": "^0.3.4",
     "react-owl-carousel2": "^0.3.0",
     "react-responsive-carousel": "^3.1.49",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "toasted-notes": "^2.1.5"
   },
   "scripts": {
     "start": "react-scripts start",

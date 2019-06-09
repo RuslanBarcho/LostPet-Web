@@ -2,12 +2,17 @@ import React from 'react';
 import Button from "@material-ui/core/Button";
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Snackbar from '@material-ui/core/Snackbar';
+import axios from 'axios';
+import toast from 'toasted-notes';
+import 'toasted-notes/src/styles.css';
 
 class Profile extends React.Component {
   constructor(props){
     super(props);
     this.state = {};
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.editProfileData = this.editProfileData.bind(this);
     this.loadProfileData(localStorage.getItem('token'));
   }
 
@@ -32,6 +37,22 @@ class Profile extends React.Component {
     }
   }
 
+  editProfileData = async () =>{
+    const position = 'bottom-left';
+    let headers = {'Content-Type': 'application/json', 'Authorization':  `Bearer ${localStorage.getItem('token')}`};
+    var body = {
+      name: this.state.name,
+      phone_number: this.state.number
+    };
+    axios.put('http://95.165.154.234:8000/user/edit',body, {headers:headers})
+    .then(response => {
+      toast.notify('Данные успешно изменены!', {position});
+    })
+    .catch(response=> {
+        toast.notify('Произошла ошибка!', {position});
+    });
+  }
+
   render(){
     return (
       <div className='vi-page-v2'>
@@ -48,7 +69,7 @@ class Profile extends React.Component {
           <div className='vi-flex-left vi-column' style={{marginRight:'20px'}}>
             <TextField name="name" autoComplete='off' label="Имя" defaultValue={this.state.user.name} variant="outlined" onChange={this.handleInputChange} style={{width:'320px', marginBottom:'40px'}}/>
             <TextField name="phone_number" autoComplete='off' label="Телефон" defaultValue={this.state.user.phone_number} variant="outlined" onChange={this.handleInputChange} style={{width:'320px', marginBottom:'40px'}}/>
-            <Button className='vi-orange-button vi-large-button' variant="contained" style={{marginBottom:'25px', color:'white'}}>Сохранить</Button>
+            <Button className='vi-orange-button vi-large-button' variant="contained" onClick={this.editProfileData} style={{marginBottom:'25px', color:'white'}}>Сохранить</Button>
           </div>
         </div>
         : <div className="vi-100vh"><CircularProgress/></div>}
