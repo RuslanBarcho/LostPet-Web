@@ -35,7 +35,7 @@ class Advert extends React.Component {
           <div>
             <h1 style={{paddingLeft:'20px'}}>{this.state.content.advertTitle}</h1>
             <div className='vi-flex-left vi-row' style={{paddingLeft:'20px', paddingBottom:'40px'}}>
-              <div className='vi-flex-left vi-column' style={{paddingRight: '20px'}}>
+              <div className='vi-flex-left vi-column' style={{paddingRight: '40px'}}>
                 <ImageView content={this.state.content.pictureURL}/>
                 <div style={{width:'400px', marginBottom:'20px'}}><a>{this.state.content.advertDescription}</a></div>
               </div>
