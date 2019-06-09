@@ -110,6 +110,16 @@ code {
   overflow: hidden;
 }
 
+.vi-circle{
+  display: flex;
+	position: relative;
+	width: 100px;
+	height: 100px;
+	background: #FFFFFF;
+	border-radius: 100%;
+  overflow: hidden;
+}
+
 .vi-center-crop {
   background-size: cover;
   background-position: center center;
