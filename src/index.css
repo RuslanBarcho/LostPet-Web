@@ -87,6 +87,19 @@ code {
   overflow: hidden;
 }
 
+.vi-card-large {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	position: relative;
+  margin-bottom: 15px;
+	width: 400px;
+	height: 320px;
+	background: #FFFFFF;
+	border-radius: 5px;
+  overflow: hidden;
+}
+
 .vi-center-crop {
   background-size: cover;
   background-position: center center;
@@ -157,4 +170,17 @@ ul{
 
 .vi-column {
 	flex-direction: column;
+}
+
+.vi-large-button{
+  width: 220px;
+  height: 48px;
+}
+
+.vi-blue-button {
+  background: linear-gradient(to right, #6AC2EB, #6AA5EB);
+}
+
+.vi-orange-button {
+  background: linear-gradient(to right, #F6BE6B, #F3A97F);
 }

@@ -75,8 +75,8 @@ class Create extends React.Component {
           </div>
         </div>
         <div className='vi-flex-left vi-row' style={{paddingLeft:'20px'}}>
-          <Button variant="contained" onClick={this.createAdvert.bind(this)} style={{marginTop:'10px', marginRight:'10px', width:'150px'}}>Создать</Button>
-          <Button variant="contained" style={{marginTop:'10px', marginRight:'10px', width:'150px'}}>Отменить</Button>
+          <Button className='vi-orange-button vi-large-button' variant="contained" onClick={this.createAdvert.bind(this)} style={{marginTop:'10px', marginRight:'20px', color:'white'}}>Создать</Button>
+          <Button className='vi-blue-button vi-large-button' variant="contained" style={{marginTop:'10px', marginRight:'10px', color:'white'}}>Отменить</Button>
         </div>
       </div>
     );

@@ -1,6 +1,5 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { Redirect } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 
 class Login extends React.Component {
