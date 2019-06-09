@@ -35,13 +35,20 @@ class Advert extends React.Component {
           <div>
             <h1 style={{paddingLeft:'20px'}}>{this.state.content.advertTitle}</h1>
             <div className='vi-flex-left vi-row' style={{paddingLeft:'20px', paddingBottom:'40px'}}>
-              <div className='vi-flex-left vi-column'>
+              <div className='vi-flex-left vi-column' style={{paddingRight: '20px'}}>
                 <ImageView content={this.state.content.pictureURL}/>
-                <div style={{width:'400px'}}><a>{this.state.content.advertDescription}</a></div>
+                <div style={{width:'400px', marginBottom:'20px'}}><a>{this.state.content.advertDescription}</a></div>
               </div>
-              <div className='vi-flex-left vi-column' style={{paddingLeft: '20px'}}>
+              <div className='vi-flex-left vi-column'>
                 <Button className='vi-blue-button vi-large-button' variant="contained" theme='dark' style={{marginBottom:'15px', color:'white'}} onClick={this.displayPhone}>{this.state.displayPhone}</Button>
-                <Button className='vi-orange-button vi-large-button' variant="contained" style={{color:'white'}}>Написать</Button>
+                <Button className='vi-orange-button vi-large-button' variant="contained" style={{marginBottom:'25px', color:'white'}}>Написать</Button>
+                <div className='vi-flex-left vi-row'>
+                  {this.state.content.owner.pictureURL ?
+                    <div className='vi-circle-small vi-center-crop' style={{backgroundImage: `url(${this.state.content.owner.pictureURL})`, marginRight:'15px'}}></div>
+                    : null
+                  }
+                  <a style={{alignSelf: 'center'}}>{this.state.content.owner.name}</a>
+                </div>
               </div>
             </div>
           </div>
@@ -49,7 +56,6 @@ class Advert extends React.Component {
           <div className="vi-100vh">
             <div><CircularProgress/></div>
           </div>
-
         }
       </div>
     );

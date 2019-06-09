@@ -37,10 +37,10 @@ render(){
          <div className="vi-flex vi-column">
             <div className="vi-flex-v2 vi-column">
                <div className="vi-flex-v2 vi-column">
-                  <TextField name='phone_number' onChange={e=>this.handleInputChange(e)} label="Phone"/>
+                  <TextField name='phone_number' onChange={e=>this.handleInputChange(e)} label="Телефон"/>
                </div>
                <div className="vi-flex-v2 vi-column">
-                  <TextField name='password' onChange={e=>this.handleInputChange(e)} label="Password" type="password" />
+                  <TextField name='password' onChange={e=>this.handleInputChange(e)} label="Пароль" type="password" />
                </div>
             </div>
             <div className="vi-flex-v2 vi-row">
