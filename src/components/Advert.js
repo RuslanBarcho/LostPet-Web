@@ -37,7 +37,7 @@ class Advert extends React.Component {
             <div className='vi-flex-left vi-row' style={{paddingLeft:'20px', paddingBottom:'40px'}}>
               <div className='vi-flex-advert vi-column' style={{paddingRight: '40px'}}>
                 <ImageView content={this.state.content.pictureURL}/>
-                <div className='vi-description' style={{marginBottom:'20px'}}>{this.state.content.advertDescription}</div>
+                <div className='vi-description' style={{marginBottom:'20px'}}><a>{this.state.content.advertDescription}</a></div>
               </div>
               <div className='vi-flex-left vi-column'>
                 <Button className='vi-blue-button vi-large-button' variant="contained" theme='dark' style={{marginBottom:'15px', color:'white'}} onClick={this.displayPhone}>{this.state.displayPhone}</Button>
