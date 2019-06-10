@@ -44,8 +44,8 @@ render(){
                </div>
             </div>
             <div className="vi-flex-v2 vi-row">
-               <a className="test"><Button onClick={this.login} variant="contained">Войти</Button></a>
-               <Button variant="contained">Создать аккаунт</Button>
+               <Button className='vi-orange-button' variant="contained" onClick={this.login} style={{color:'white', marginRight:'15px'}}>Войти</Button>
+               <Button className='vi-blue-button' variant="contained" style={{color:'white'}}>Создать аккаунт</Button>
             </div>
          </div>
       </div>
