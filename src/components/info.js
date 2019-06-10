@@ -50,12 +50,12 @@ class Info extends React.Component {
   render(){
     return (
       <div className="vi-page-v2">
-        <h1 style={{paddingLeft:'20px'}}>Все объявления</h1>
-        <Paper style={{width:'320px', marginLeft:'20px'}} className='paper'>
+        <h1 style={{paddingLeft:'20px', paddingRight:'20px'}}>Все объявления</h1>
+        <Paper className='vi-search-default' style={{ marginLeft:'20px'}}>
           <IconButton className='iconButton' aria-label="Search" onClick={this.searchAdverts}>
             <SearchIcon />
           </IconButton>
-          <InputBase className='input' name='searchQuery' onChange={e=>this.handleInputChange(e)} onKeyUp={e=>this.handleKeyPress(e)} placeholder="Поиск" />
+          <InputBase style={{width:'80%'}} className='input' name='searchQuery' onChange={e=>this.handleInputChange(e)} onKeyUp={e=>this.handleKeyPress(e)} placeholder="Поиск" />
         </Paper>
         {this.state.adverts ?
           <Grid container>

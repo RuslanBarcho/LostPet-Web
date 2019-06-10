@@ -56,9 +56,9 @@ class Profile extends React.Component {
   render(){
     return (
       <div className='vi-page-v2'>
-        <div className='vi-flex-left vi-row' style={{marginBottom:'35px'}}>
+        <div className='vi-flex-left vi-row' style={{marginBottom:'35px', justifyContent:'space-between'}}>
           <h1 style={{paddingLeft:'20px', paddingRight:'40px'}}>Мой профиль</h1>
-          <Button variant="outlined" onClick={this.logout.bind(this)} style={{alignSelf:'center', border: 'solid 1px #B00020',color: '#B00020'}}>Выйти</Button>
+          <Button variant="outlined" onClick={this.logout.bind(this)} style={{alignSelf:'center', border: 'solid 1px #B00020',color: '#B00020', marginRight:'40px', marginLeft:'20px'}}>Выйти</Button>
         </div>
         {this.state.user ?
         <div className='vi-flex-left vi-row' style={{paddingLeft:'20px', paddingBottom:'40px'}}>
@@ -67,8 +67,8 @@ class Profile extends React.Component {
             :<div className='vi-circle vi-center-crop' style={{backgroundColor: '#FCFCFC', marginRight:'40px', marginBottom:'20px'}}></div>
           }
           <div className='vi-flex-left vi-column' style={{marginRight:'20px'}}>
-            <TextField name="name" autoComplete='off' label="Имя" defaultValue={this.state.user.name} variant="outlined" onChange={this.handleInputChange} style={{width:'320px', marginBottom:'40px'}}/>
-            <TextField name="phone_number" autoComplete='off' label="Телефон" defaultValue={this.state.user.phone_number} variant="outlined" onChange={this.handleInputChange} style={{width:'320px', marginBottom:'40px'}}/>
+            <TextField className='vi-input-default' name="name" autoComplete='off' label="Имя" defaultValue={this.state.user.name} variant="outlined" onChange={this.handleInputChange} style={{marginBottom:'40px'}}/>
+            <TextField className='vi-input-default' name="phone_number" autoComplete='off' label="Телефон" defaultValue={this.state.user.phone_number} variant="outlined" onChange={this.handleInputChange} style={{marginBottom:'40px'}}/>
             <Button className='vi-orange-button vi-large-button' variant="contained" onClick={this.editProfileData} style={{marginBottom:'25px', color:'white'}}>Сохранить</Button>
           </div>
         </div>

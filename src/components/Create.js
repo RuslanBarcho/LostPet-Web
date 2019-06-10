@@ -50,12 +50,12 @@ class Create extends React.Component {
       <div className='vi-page-v2'>
         <h1 style={{paddingLeft:'20px'}}>Новое объявление</h1>
         <div className='vi-flex-left vi-row' style={{paddingLeft:'20px', paddingBottom:'40px'}}>
-          <div className='vi-flex-left vi-column'>
-            <TextField name="title" autoComplete='off' label="Название" placeholder="Название" variant="outlined" onChange={this.handleInputChange} style={{width:'320px', marginBottom:'20px', paddingRight:'20px'}}/>
-            <TextField name="description" autoComplete='off' label="Описание" multiline rows="5" variant="outlined" onChange={this.handleInputChange} style={{width:'320px', marginBottom:'20px'}}/>
+          <div className='vi-flex-left vi-column' style={{paddingRight:'20px'}}>
+            <TextField className='vi-input-default' name="title" autoComplete='off' label="Название" placeholder="Название" variant="outlined" onChange={this.handleInputChange} style={{marginBottom:'20px'}}/>
+            <TextField className='vi-input-default' name="description" autoComplete='off' label="Описание" multiline rows="5" variant="outlined" onChange={this.handleInputChange} style={{marginBottom:'20px'}}/>
             <h3>Категории</h3>
             <div className='vi-flex-left vi-row'>
-              <RadioGroup onChange={this.handleInputChange} aria-label="Тип животного" name="animalType" style={{marginRight:'30px'}}>
+              <RadioGroup onChange={this.handleInputChange} aria-label="Тип животного" name="animalType" style={{marginRight:'30px', marginBottom:'20px'}}>
                 <FormControlLabel value="cat" control={<Radio color="primary" />} label="Кошка" />
                 <FormControlLabel value="dog" control={<Radio color="primary" />} label="Собака" />
               </RadioGroup>

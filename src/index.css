@@ -134,7 +134,7 @@ ul{
 .vi-page-v2 {
   width: 100%;
 	float: none;
-  margin-left: 100px;
+  margin-left: 90px;
 }
 
 .test{
@@ -203,4 +203,50 @@ ul{
 
 .vi-orange-button {
   background: linear-gradient(to right, #F6BE6B, #F3A97F);
+}
+
+.vi-description {
+  width: 400px
+}
+
+.vi-input-default {
+  width: 320px
+}
+
+.vi-search-default {
+  width: 320px
+}
+
+@media screen and (max-width: 700px) {
+  .vi-card-large {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    position: relative;
+    margin-bottom: 15px;
+    width: 100%;
+    height: 200px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .vi-center-crop {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  .vi-description {
+    width: 100%
+  }
+
+  .vi-input-default {
+    width: 100%
+  }
+
+  .vi-search-default {
+    width: 90%
+  }
+
 }
