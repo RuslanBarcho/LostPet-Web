@@ -64,7 +64,7 @@ class Profile extends React.Component {
         <div className='vi-flex-left vi-row' style={{paddingLeft:'20px', paddingBottom:'40px'}}>
           {this.state.user.pictureURL ?
             <div className='vi-circle vi-center-crop' style={{backgroundImage: `url(${this.state.user.pictureURL})`, marginRight:'40px', marginBottom:'20px'}}></div>
-            :<div className='vi-circle vi-center-crop' style={{backgroundColor: '#FCFCFC', marginRight:'40px', marginBottom:'20px'}}></div>
+            :<div className='vi-circle' style={{marginRight:'40px', marginBottom:'20px'}}></div>
           }
           <div className='vi-flex-left vi-column' style={{marginRight:'20px'}}>
             <TextField className='vi-input-default' name="name" autoComplete='off' label="Имя" defaultValue={this.state.user.name} variant="outlined" onChange={this.handleInputChange} style={{marginBottom:'40px'}}/>

@@ -1,6 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 class Login extends React.Component {
   constructor(props){
@@ -45,7 +46,7 @@ render(){
             </div>
             <div className="vi-flex-v2 vi-row">
                <Button className='vi-orange-button' variant="contained" onClick={this.login} style={{color:'white', marginRight:'15px'}}>Войти</Button>
-               <Button className='vi-blue-button' variant="contained" style={{color:'white'}}>Создать аккаунт</Button>
+               <Link to="/register"><Button className='vi-blue-button' variant="contained" style={{color:'white'}}>Создать аккаунт</Button></Link>
             </div>
          </div>
       </div>

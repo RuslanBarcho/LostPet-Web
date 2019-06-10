@@ -115,7 +115,7 @@ code {
 	position: relative;
 	width: 100px;
 	height: 100px;
-	background: #FFFFFF;
+  background-color: #F4AC5B;
 	border-radius: 100%;
   overflow: hidden;
 }
@@ -184,6 +184,14 @@ ul{
   align-content: flex-start;
 }
 
+.vi-flex-advert {
+	display: flex;
+	flex-wrap: wrap;
+	width: auto;
+	height: auto;
+  align-content: flex-start;
+}
+
 .vi-row {
 	flex-direction: row;
 }
@@ -206,7 +214,7 @@ ul{
 }
 
 .vi-description {
-  width: 400px
+  width: 100%
 }
 
 .vi-input-default {
@@ -218,6 +226,7 @@ ul{
 }
 
 @media screen and (max-width: 700px) {
+
   .vi-card-large {
     display: flex;
     flex-direction: column;
@@ -238,15 +247,25 @@ ul{
   }
 
   .vi-description {
-    width: 100%
+    align-self: stretch;
+    width: 100%;
   }
 
   .vi-input-default {
-    width: 100%
+    width: 100%;
   }
 
   .vi-search-default {
-    width: 90%
+    width: 95%;
+  }
+
+  .vi-flex-advert {
+  	display: flex;
+  	flex-wrap: wrap;
+  	width: 100%;
+  	height: auto;
+    align-content: flex-start;
+    justify-content: stretch;
   }
 
 }

@@ -50,7 +50,8 @@ class Info extends React.Component {
   render(){
     return (
       <div className="vi-page-v2">
-        <h1 style={{paddingLeft:'20px', paddingRight:'20px'}}>Все объявления</h1>
+        <div style={{paddingRight:'20px'}}>
+        <h1 style={{paddingLeft:'20px'}}>Все объявления</h1>
         <Paper className='vi-search-default' style={{ marginLeft:'20px'}}>
           <IconButton className='iconButton' aria-label="Search" onClick={this.searchAdverts}>
             <SearchIcon />
@@ -70,6 +71,7 @@ class Info extends React.Component {
             </Grid>
           : null
         }
+        </div>
       </div>
     );
   }
