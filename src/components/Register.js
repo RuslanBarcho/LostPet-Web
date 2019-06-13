@@ -55,8 +55,8 @@ class Register extends React.Component {
             <TextField className='vi-input-default' name="phone_number" autoComplete='off' label="Телефон" variant="outlined" onChange={this.handleInputChange} style={{marginBottom:'30px'}}/>
           </div>
           <div className='vi-flex-left vi-column' style={{marginRight:'40px'}}>
-            <TextField className='vi-input-default' name="password" autoComplete='off' label="Пароль" variant="outlined" onChange={this.handleInputChange} style={{marginBottom:'30px'}}/>
-            <TextField className='vi-input-default' name="password_confirm" autoComplete='off' label="Подтвердите пароль" variant="outlined" onChange={this.handleInputChange} style={{marginBottom:'30px'}}/>
+            <TextField className='vi-input-default' name="password" autoComplete='new-password' label="Пароль" variant="outlined" type="password" onChange={this.handleInputChange} style={{marginBottom:'30px'}}/>
+            <TextField className='vi-input-default' name="password_confirm" autoComplete='new-password' label="Подтвердите пароль" variant="outlined" type="password" onChange={this.handleInputChange} style={{marginBottom:'30px'}}/>
           </div>
         </div>
         <Button className='vi-orange-button vi-large-button' variant="contained" onClick={this.register} style={{marginLeft:'20px',marginBottom:'25px', color:'white'}}>Создать аккаунт</Button>

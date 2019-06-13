@@ -13,13 +13,21 @@ class Advert extends React.Component {
   }
 
   getDetail = async (id) => {
-    let headers = {'Content-Type': 'application/json', 'Authorization':  `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZV9udW1iZXIiOiI3OTE1MTE2MjkwNSIsInVzZXJJZCI6IjVjYWJlNDgxNDM4N2NkMGNkNzI5ZGIzMSIsImlhdCI6MTU1OTU2MDY5Nn0.1g1og0SOE7bj6I7xNxNrGGdVaTz_OdWqOZ_te_mzKEs`};
-    const apiUrl = await fetch(`http://95.165.154.234:8000/posts/post/${id}`, {headers});
+    let headers = {'Content-Type': 'application/json'};
+    let url = `http://95.165.154.234:8000/posts/public/post/${id}`;
+    if (localStorage.getItem('token')){
+      headers = {'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`};
+      url = `http://95.165.154.234:8000/posts/post/${id}`
+    }
+    let apiUrl = await fetch(url, {headers});
     const data = await apiUrl.json();
-    this.setState({
-      content: data,
-      displayPhone: 'Показать телефон'
-    });
+    console.log(data);
+    if (data.owner){
+      this.setState({
+        content: data,
+        displayPhone: 'Показать телефон'
+      });
+    }
   }
 
   displayPhone = () => {
