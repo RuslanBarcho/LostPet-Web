@@ -6,6 +6,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/AddPhotoAlternate";
+import toast from 'toasted-notes';
 
 class Create extends React.Component {
   constructor(props){
@@ -27,6 +28,7 @@ class Create extends React.Component {
   }
 
   createAdvert = async () =>{
+    const position = 'bottom-left';
     let advert = {
       animalType: this.state.animalType,
       advertType: this.state.advertType,
@@ -37,8 +39,12 @@ class Create extends React.Component {
     formData.append('image0',this.state.selectedFile);
     formData.set('json',JSON.stringify(advert));
     axios.post('http://95.165.154.234:8000/posts/create', formData,{ headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`, 'Content-Type': 'multipart/form-data'}})
-    .then(function (response) {
+    .then(response => {
         console.log(response);
+        if (response.status == 201){
+          this.props.history.push("/");
+          toast.notify('Объявление отправлено на сервер. Оно появится в общем доступе через несколько минут!', {position});
+        }
     })
     .catch(function (response) {
         console.log(response);
