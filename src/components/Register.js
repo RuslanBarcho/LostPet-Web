@@ -22,7 +22,7 @@ class Register extends React.Component {
       password: this.state.password
     }
     if (user.name && user.phone_number && user.password){
-      if(user.password == this.state.password_confirm){
+      if(user.password === this.state.password_confirm){
         axios.post('http://95.165.154.234:8000/user/create',user, {headers:headers})
         .then(response => {
           toast.notify('Аккаунт успешно создан!', {position});
@@ -50,14 +50,18 @@ class Register extends React.Component {
       <div className='vi-page-v2'>
         <h1 style={{paddingLeft:'20px', marginBottom:'30px'}}>Регистрация</h1>
         <div className='vi-flex-left vi-row' style={{marginLeft:'20px'}}>
+        <form>
           <div className='vi-flex-left vi-column' style={{marginRight:'40px'}}>
             <TextField className='vi-input-default' name="name" autoComplete='off' label="Имя" variant="outlined" onChange={this.handleInputChange} style={{marginBottom:'30px'}}/>
             <TextField className='vi-input-default' name="phone_number" autoComplete='off' label="Телефон" variant="outlined" onChange={this.handleInputChange} style={{marginBottom:'30px'}}/>
           </div>
+        </form>
+        <form>
           <div className='vi-flex-left vi-column' style={{marginRight:'40px'}}>
-            <TextField className='vi-input-default' name="password" autoComplete='new-password' label="Пароль" variant="outlined" type="password" onChange={this.handleInputChange} style={{marginBottom:'30px'}}/>
-            <TextField className='vi-input-default' name="password_confirm" autoComplete='new-password' label="Подтвердите пароль" variant="outlined" type="password" onChange={this.handleInputChange} style={{marginBottom:'30px'}}/>
+            <TextField className='vi-input-default' name="password" autoComplete='off' label="Пароль" variant="outlined" type="password" onChange={this.handleInputChange} style={{marginBottom:'30px'}}/>
+            <TextField className='vi-input-default' name="password_confirm" autoComplete='off' label="Подтвердите пароль" variant="outlined" type="password" onChange={this.handleInputChange} style={{marginBottom:'30px'}}/>
           </div>
+        </form>
         </div>
         <Button className='vi-orange-button vi-large-button' variant="contained" onClick={this.register} style={{marginLeft:'20px',marginBottom:'25px', color:'white'}}>Создать аккаунт</Button>
       </div>

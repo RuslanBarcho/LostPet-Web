@@ -56,7 +56,7 @@ class Info extends React.Component {
           <IconButton className='iconButton' aria-label="Search" onClick={this.searchAdverts}>
             <SearchIcon />
           </IconButton>
-          <InputBase style={{width:'80%'}} className='input' name='searchQuery' onChange={e=>this.handleInputChange(e)} onKeyUp={e=>this.handleKeyPress(e)} placeholder="Поиск" />
+          <InputBase style={{width:'80%'}} className='input' autoComplete='off' name='searchQuery' onChange={e=>this.handleInputChange(e)} onKeyUp={e=>this.handleKeyPress(e)} placeholder="Поиск" />
         </Paper>
         {this.state.adverts ?
           <Grid container>

@@ -2,7 +2,6 @@ import React from 'react';
 import Button from "@material-ui/core/Button";
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Snackbar from '@material-ui/core/Snackbar';
 import axios from 'axios';
 import toast from 'toasted-notes';
 import 'toasted-notes/src/styles.css';

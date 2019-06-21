@@ -41,7 +41,7 @@ class Create extends React.Component {
     axios.post('http://95.165.154.234:8000/posts/create', formData,{ headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`, 'Content-Type': 'multipart/form-data'}})
     .then(response => {
         console.log(response);
-        if (response.status == 201){
+        if (response.status === 201){
           this.props.history.push("/");
           toast.notify('Объявление отправлено на сервер. Оно появится в общем доступе через несколько минут!', {position});
         }
