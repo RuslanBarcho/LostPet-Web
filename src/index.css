@@ -85,6 +85,7 @@ code {
 	background: #FFFFFF;
 	border-radius: 5px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .vi-card-large {
@@ -98,6 +99,7 @@ code {
 	background: #FFFFFF;
 	border-radius: 5px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .vi-circle-small{
@@ -225,18 +227,39 @@ ul{
   width: 320px
 }
 
-.vi-dim {
-    height:100%;
-    width:100%;
-    position:fixed;
-    left:0;
-    top:0;
-    z-index:1 !important;
-    background-color:black;
-    filter: alpha(opacity=75); /* internet explorer */
-    -khtml-opacity: 0.75;      /* khtml, old safari */
-      -moz-opacity: 0.75;      /* mozilla, netscape */
-           opacity: 0.75;      /* fx, safari, opera */
+.vi-overlay {
+  background-size: cover;
+  background: rgba(0, 0, 0, 0.75);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index:1 !important;
+}
+
+.vi-overlay-img {
+  position: relative;
+  align-content: center;
+  width: auto;
+  height: inherit;
+  vertical-align: middle;
+}
+
+.vi-img-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: auto;
+  max-width: 100vw;
+  max-height: 100vh;
+  z-index:1;
+}
+
+.vi-overlay-img::selection {
+  background: transparent;
 }
 
 @media screen and (max-width: 700px) {
@@ -252,6 +275,7 @@ ul{
     background: #FFFFFF;
     border-radius: 5px;
     overflow: hidden;
+    cursor: pointer;
   }
 
   .vi-center-crop {
