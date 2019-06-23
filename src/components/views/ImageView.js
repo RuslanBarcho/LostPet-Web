@@ -8,6 +8,7 @@ class ImageView extends React.Component {
       selected: 0
     };
     this.setSelected = this.setSelected.bind(this);
+    this.changeFull = this.changeFull.bind(this);
   }
 
   setSelected = (index) => {
@@ -16,10 +17,26 @@ class ImageView extends React.Component {
     });
   }
 
+  changeFull = (active) => {
+    if (active){
+      this.setState({
+        fullSize: this.props.content[this.state.selected]
+      });
+    } else {
+      this.setState({
+        fullSize: undefined
+      });
+    }
+  }
+
   render(){
     return (
       <div>
-        <div style={{backgroundImage: `url(${this.props.content[this.state.selected]})`}} className="vi-card-large vi-column vi-center-crop"></div>
+        {this.state.fullSize ?
+        <div className='vi-dim' onClick={e => this.changeFull(false)}>
+          <div style={{backgroundImage: `url(${this.state.fullSize})`}}></div>
+        </div>: null}
+        <div style={{backgroundImage: `url(${this.props.content[this.state.selected]})`}} onClick={e => this.changeFull(true)} className="vi-card-large vi-column vi-center-crop"></div>
         <div className='vi-flex-left vi-row' style={{paddingBottom:'15px'}}>
         {this.props.content.map((value, index) => (
           <div key={index}>
