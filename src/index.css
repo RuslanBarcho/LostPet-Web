@@ -236,6 +236,9 @@ ul{
   top: 0;
   left: 0;
   z-index:1 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .vi-overlay-img {
@@ -243,7 +246,6 @@ ul{
   align-content: center;
   width: auto;
   height: inherit;
-  vertical-align: middle;
 }
 
 .vi-img-container {
