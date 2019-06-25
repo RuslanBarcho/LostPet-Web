@@ -186,6 +186,14 @@ ul{
   align-content: flex-start;
 }
 
+.vi-flex-nowrap {
+	display: flex;
+	flex-wrap: nowrap;
+	width: auto;
+	height: auto;
+  align-content: flex-start;
+}
+
 .vi-flex-advert {
   display: flex;
 	flex-wrap: wrap;
@@ -306,6 +314,14 @@ ul{
   	height: auto;
     align-content: flex-start;
     justify-content: stretch;
+  }
+
+  .vi-flex-nowrap {
+  	display: flex;
+  	flex-wrap: wrap;
+  	width: auto;
+  	height: auto;
+    align-content: flex-start;
   }
 
 }

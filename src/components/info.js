@@ -5,6 +5,8 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from "react-router-dom";
+import FilterView from './views/FilterView';
+import axios from 'axios';
 
 class Info extends React.Component {
 
@@ -47,6 +49,14 @@ class Info extends React.Component {
     }
   }
 
+  filterAdverts = async (body) => {
+    let headers = {'Content-Type': 'application/json', 'Authorization':  `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZV9udW1iZXIiOiI3OTE1MTE2MjkwNSIsInVzZXJJZCI6IjVjYWJlNDgxNDM4N2NkMGNkNzI5ZGIzMSIsImlhdCI6MTU1OTU2MDY5Nn0.1g1og0SOE7bj6I7xNxNrGGdVaTz_OdWqOZ_te_mzKEs`};
+    axios.post('http://95.165.154.234:8000/posts/filtered',body, {headers:headers})
+    .then(response => {
+      this.setState({adverts: response.data});
+    });
+  }
+
   render(){
     return (
       <div className="vi-page-v2">
@@ -59,16 +69,19 @@ class Info extends React.Component {
           <InputBase style={{width:'80%'}} className='input' autoComplete='off' name='searchQuery' onChange={e=>this.handleInputChange(e)} onKeyUp={e=>this.handleKeyPress(e)} placeholder="Поиск" />
         </Paper>
         {this.state.adverts ?
+          <div className='vi-flex-nowrap vi-row'>
           <Grid container>
             {this.state.adverts.map(value => (
               <div key={value._id}>
                 <Link to={`/post/${value._id}`}>
                   <div style={{backgroundImage: `url(${value.pictureURL[0]})`}} className="vi-card vi-column vi-center-crop"></div>
                 </Link>
-                <p style={{marginLeft:'25px'}}>{value.advertTitle}</p>
+                <p style={{marginLeft:'25px', width:'200px'}}>{value.advertTitle}</p>
               </div>
             ))}
             </Grid>
+            <FilterView filterAdverts={this.filterAdverts.bind(this)}/>
+            </div>
           : null
         }
         </div>
