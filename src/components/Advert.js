@@ -21,7 +21,6 @@ class Advert extends React.Component {
     }
     let apiUrl = await fetch(url, {headers});
     const data = await apiUrl.json();
-    console.log(data);
     if (data.owner){
       this.setState({
         content: data,
