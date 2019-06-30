@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 
 const myTheme = createMuiTheme({
   palette: {
+    primary: {main: '#17193D'},
     secondary: {main: '#F4AC5B'}}
 });
 

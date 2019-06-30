@@ -12,6 +12,10 @@ class Advert extends React.Component {
     this.getDetail(this.props.match.params.id);
   }
 
+  componentDidMount() {
+    window.scrollTo(0,0);
+  }
+
   getDetail = async (id) => {
     let headers = {'Content-Type': 'application/json'};
     let url = `http://95.165.154.234:8000/posts/public/post/${id}`;

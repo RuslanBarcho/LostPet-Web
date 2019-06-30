@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import FilterView from './views/FilterView';
 import Pagination from "material-ui-flat-pagination";
 import {MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 
 const myTheme = createMuiTheme({
@@ -15,6 +16,8 @@ const myTheme = createMuiTheme({
     primary: {main: '#17193D'},
     secondary: {main: '#F4AC5B'}}
 });
+
+const defaultHeaders = {'Content-Type': 'application/json'};
 
 class Info extends React.Component {
 
@@ -44,28 +47,31 @@ class Info extends React.Component {
   }
 
   getAdverts = async () => {
-    let headers = {'Content-Type': 'application/json', 'Authorization':  `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZV9udW1iZXIiOiI3OTE1MTE2MjkwNSIsInVzZXJJZCI6IjVjYWJlNDgxNDM4N2NkMGNkNzI5ZGIzMSIsImlhdCI6MTU1OTU2MDY5Nn0.1g1og0SOE7bj6I7xNxNrGGdVaTz_OdWqOZ_te_mzKEs`};
-    const apiUrl = await fetch('http://95.165.154.234:8000/posts', {headers});
+    const apiUrl = await fetch('http://95.165.154.234:8000/posts', {defaultHeaders});
     const data = await apiUrl.json();
-    this.setState({adverts: data});
+    this.setState({adverts: data.adverts, count:data.count, offset: 0,
+      lastRequest: {type: 'normal', reqData: undefined}
+    });
   }
 
   searchAdverts = async () => {
     if(this.state.searchQuery.length > 0){
-      let headers = {'Content-Type': 'application/json', 'Authorization':  `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZV9udW1iZXIiOiI3OTE1MTE2MjkwNSIsInVzZXJJZCI6IjVjYWJlNDgxNDM4N2NkMGNkNzI5ZGIzMSIsImlhdCI6MTU1OTU2MDY5Nn0.1g1og0SOE7bj6I7xNxNrGGdVaTz_OdWqOZ_te_mzKEs`};
-      const apiUrl = await fetch(`http://95.165.154.234:8000/posts/search?q=${encodeURIComponent(this.state.searchQuery)}`, {headers});
+      const apiUrl = await fetch(`http://95.165.154.234:8000/posts/search?q=${encodeURIComponent(this.state.searchQuery)}`, {defaultHeaders});
       const data = await apiUrl.json();
-      this.setState({adverts: data});
+      this.setState({adverts: data.adverts, count:data.count, offset: 0,
+        lastRequest: {type: 'search', reqData: this.state.searchQuery}
+      });
     } else {
       this.getAdverts();
     }
   }
 
   filterAdverts = async (body) => {
-    let headers = {'Content-Type': 'application/json', 'Authorization':  `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZV9udW1iZXIiOiI3OTE1MTE2MjkwNSIsInVzZXJJZCI6IjVjYWJlNDgxNDM4N2NkMGNkNzI5ZGIzMSIsImlhdCI6MTU1OTU2MDY5Nn0.1g1og0SOE7bj6I7xNxNrGGdVaTz_OdWqOZ_te_mzKEs`};
-    axios.post('http://95.165.154.234:8000/posts/filtered',body, {headers:headers})
+    axios.post('http://95.165.154.234:8000/posts/filtered',body, {headers:defaultHeaders})
     .then(response => {
-      this.setState({adverts: response.data});
+      this.setState({adverts: response.data.adverts, count:response.data.count, offset: 0,
+        lastRequest: {type: 'filter', reqData: body}
+      });
     });
   }
 
@@ -82,7 +88,7 @@ class Info extends React.Component {
         </Paper>
         {this.state.adverts ?
           <div className='vi-flex-nowrap vi-row'>
-          <div className='vi-flex-left vi-column'>
+          <div className='vi-flex-left vi-column' style={{width: '100%'}}>
             <Grid container>
               {this.state.adverts.map(value => (
                 <div key={value._id}>
@@ -94,17 +100,16 @@ class Info extends React.Component {
               ))}
             </Grid>
               <MuiThemeProvider theme={myTheme}>
-              <Pagination
-                limit={50}
-                offset={this.state.offset}
-                total={150}
-                size = 'large'
+              <Pagination limit={50} offset={this.state.offset} total={this.state.count} size = 'large'
                 onClick={(e, offset) => this.handlePageChange(offset)} style={{marginLeft:'20px', marginBottom:'20px'}}/>
               </MuiThemeProvider>
             </div>
             <FilterView filterAdverts={this.filterAdverts.bind(this)}/>
             </div>
-          : null
+          :
+          <div className="vi-100vh">
+            <div><CircularProgress/></div>
+          </div>
         }
         </div>
       </div>
