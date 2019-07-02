@@ -44,7 +44,7 @@ class FilterView extends React.Component {
       animalTypes: petsFilterList,
       advertTypes: advertFilterList
     }
-    this.props.filterAdverts(body);
+    this.props.getAdverts('filter',body);
   }
 
   render(){

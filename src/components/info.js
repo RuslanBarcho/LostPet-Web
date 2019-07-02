@@ -6,9 +6,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from "react-router-dom";
 import FilterView from './views/FilterView';
-import Pagination from "material-ui-flat-pagination";
 import {MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import InfiniteScroll from 'react-infinite-scroller';
 import axios from 'axios';
 
 const myTheme = createMuiTheme({
@@ -23,11 +23,12 @@ class Info extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = { offset: 0 };
-    this.getAdverts();
-    this.searchAdverts = this.searchAdverts.bind(this);
+    this.state = { hasMore: false };
+    this.getAdverts = this.getAdverts.bind(this);
+    this.getAdverts('normal', undefined);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.loadNextPage = this.loadNextPage.bind(this);
   }
 
   handleInputChange(event) {
@@ -38,7 +39,7 @@ class Info extends React.Component {
 
   handleKeyPress(e) {
     if (e.key === 'Enter') {
-        this.searchAdverts();
+        this.getAdverts('search', undefined);
     }
   }
 
@@ -46,32 +47,31 @@ class Info extends React.Component {
     this.setState({ offset });
   }
 
-  getAdverts = async () => {
-    const apiUrl = await fetch('http://95.165.154.234:8000/posts', {defaultHeaders});
-    const data = await apiUrl.json();
-    this.setState({adverts: data.adverts, count:data.count, offset: 0,
-      lastRequest: {type: 'normal', reqData: undefined}
-    });
+  async loadNextPage(){
+    this.getAdverts(this.state.lastRequest.type, this.state.lastRequest.reqData);
   }
 
-  searchAdverts = async () => {
-    if(this.state.searchQuery.length > 0){
-      const apiUrl = await fetch(`http://95.165.154.234:8000/posts/search?q=${encodeURIComponent(this.state.searchQuery)}`, {defaultHeaders});
-      const data = await apiUrl.json();
-      this.setState({adverts: data.adverts, count:data.count, offset: 0,
-        lastRequest: {type: 'search', reqData: this.state.searchQuery}
-      });
-    } else {
-      this.getAdverts();
+  getAdverts = async (type, body) => {
+    var response;
+    switch (type){
+      case 'normal':
+        response = await fetch('http://95.165.154.234:8000/posts', {defaultHeaders});
+        break;
+      case 'search':
+        if (this.state.searchQuery.length > 0) response = await fetch(`http://95.165.154.234:8000/posts/search?q=${encodeURIComponent(this.state.searchQuery)}`, {defaultHeaders});
+        else response = await fetch('http://95.165.154.234:8000/posts', {defaultHeaders});
+        break;
+      case 'filter':
+        response = await fetch('http://95.165.154.234:8000/posts/filtered', {method: 'POST', headers: defaultHeaders, body: JSON.stringify(body)});
+        break;
     }
-  }
-
-  filterAdverts = async (body) => {
-    axios.post('http://95.165.154.234:8000/posts/filtered',body, {headers:defaultHeaders})
-    .then(response => {
-      this.setState({adverts: response.data.adverts, count:response.data.count, offset: 0,
-        lastRequest: {type: 'filter', reqData: body}
-      });
+    const data = await response.json();
+    var adverts = data.adverts;
+    if (this.state.adverts){
+      var adverts = this.state.adverts.concat(data.adverts);
+    }
+    this.setState({adverts: adverts, count:data.count, hasMore: adverts.length < data.count.length,
+      lastRequest: {type: type, reqData: body}
     });
   }
 
@@ -81,7 +81,7 @@ class Info extends React.Component {
         <div style={{paddingRight:'20px'}}>
         <h1 style={{paddingLeft:'20px'}}>Все объявления</h1>
         <Paper className='vi-search-default' style={{ marginLeft:'20px'}}>
-          <IconButton className='iconButton' aria-label="Search" onClick={this.searchAdverts}>
+          <IconButton className='iconButton' aria-label="Search" onClick={e => this.getAdverts('search', undefined)}>
             <SearchIcon />
           </IconButton>
           <InputBase style={{width:'80%'}} className='input' autoComplete='off' name='searchQuery' onChange={e=>this.handleInputChange(e)} onKeyUp={e=>this.handleKeyPress(e)} placeholder="Поиск" />
@@ -89,6 +89,11 @@ class Info extends React.Component {
         {this.state.adverts ?
           <div className='vi-flex-nowrap vi-row'>
           <div className='vi-flex-left vi-column' style={{width: '100%'}}>
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={this.loadNextPage}
+            hasMore={this.state.hasMore}
+            loader={<div className="loader" key={0}>Loading ...</div>}>
             <Grid container>
               {this.state.adverts.map(value => (
                 <div key={value._id}>
@@ -99,13 +104,10 @@ class Info extends React.Component {
                 </div>
               ))}
             </Grid>
-              <MuiThemeProvider theme={myTheme}>
-              <Pagination limit={50} offset={this.state.offset} total={this.state.count} size = 'large'
-                onClick={(e, offset) => this.handlePageChange(offset)} style={{marginLeft:'20px', marginBottom:'20px'}}/>
-              </MuiThemeProvider>
-            </div>
-            <FilterView filterAdverts={this.filterAdverts.bind(this)}/>
-            </div>
+          </InfiniteScroll>
+          </div>
+            <FilterView getAdverts={this.getAdverts}/>
+          </div>
           :
           <div className="vi-100vh">
             <div><CircularProgress/></div>
