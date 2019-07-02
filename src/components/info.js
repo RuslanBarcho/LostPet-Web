@@ -93,7 +93,7 @@ class Info extends React.Component {
             pageStart={0}
             loadMore={this.loadNextPage}
             hasMore={this.state.hasMore}
-            loader={<div className="loader" key={0}>Loading ...</div>}>
+            loader={<div className="loader" key={0}><CircularProgress/></div>}>
             <Grid container>
               {this.state.adverts.map(value => (
                 <div key={value._id}>
@@ -109,9 +109,7 @@ class Info extends React.Component {
             <FilterView getAdverts={this.getAdverts}/>
           </div>
           :
-          <div className="vi-100vh">
-            <div><CircularProgress/></div>
-          </div>
+          <div className="vi-100vh"><CircularProgress/></div>
         }
         </div>
       </div>
