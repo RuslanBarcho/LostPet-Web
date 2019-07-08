@@ -9,7 +9,6 @@ import FilterView from './views/FilterView';
 import {MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import InfiniteScroll from 'react-infinite-scroller';
-import axios from 'axios';
 
 const myTheme = createMuiTheme({
   palette: {
@@ -23,7 +22,7 @@ class Info extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = { hasMore: false };
+    this.state = { hasMore: false, renderCount: 0};
     this.getAdverts = this.getAdverts.bind(this);
     this.getAdverts('normal', undefined);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -48,17 +47,20 @@ class Info extends React.Component {
   }
 
   async loadNextPage(){
-    this.getAdverts(this.state.lastRequest.type, this.state.lastRequest.reqData);
+    this.getAdverts(this.state.lastRequest.type, this.state.lastRequest.reqData, true);
   }
 
-  getAdverts = async (type, body) => {
+  getAdverts = async (type, body, loadMore) => {
     var response;
     switch (type){
       case 'normal':
         response = await fetch('http://95.165.154.234:8000/posts', {defaultHeaders});
         break;
       case 'search':
-        if (this.state.searchQuery.length > 0) response = await fetch(`http://95.165.154.234:8000/posts/search?q=${encodeURIComponent(this.state.searchQuery)}`, {defaultHeaders});
+        if (this.state.searchQuery){
+          if (this.state.searchQuery.length > 0) response = await fetch(`http://95.165.154.234:8000/posts/search?q=${encodeURIComponent(this.state.searchQuery)}`, {defaultHeaders});
+          else response = await fetch('http://95.165.154.234:8000/posts', {defaultHeaders});
+        }
         else response = await fetch('http://95.165.154.234:8000/posts', {defaultHeaders});
         break;
       case 'filter':
@@ -67,11 +69,14 @@ class Info extends React.Component {
     }
     const data = await response.json();
     var adverts = data.adverts;
-    if (this.state.adverts){
-      var adverts = this.state.adverts.concat(data.adverts);
+    var renderCount = this.state.renderCount;
+    if (loadMore){
+      adverts = this.state.adverts.concat(data.adverts);
+    } else {
+      renderCount += 1;
     }
     this.setState({adverts: adverts, count:data.count, hasMore: adverts.length < data.count.length,
-      lastRequest: {type: type, reqData: body}
+      lastRequest: {type: type, reqData: body}, renderCount: renderCount
     });
   }
 
@@ -93,6 +98,7 @@ class Info extends React.Component {
             pageStart={0}
             loadMore={this.loadNextPage}
             hasMore={this.state.hasMore}
+            key={this.state.renderCount}
             loader={<div className="loader" key={0}><CircularProgress/></div>}>
             <Grid container>
               {this.state.adverts.map(value => (
