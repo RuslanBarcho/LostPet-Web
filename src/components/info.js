@@ -51,7 +51,7 @@ class Info extends React.Component {
   }
 
   getAdverts = async (type, body, loadMore) => {
-    var response;
+    let response;
     switch (type){
       case 'normal':
         response = await fetch('http://95.165.154.234:8000/posts', {defaultHeaders});
@@ -68,8 +68,8 @@ class Info extends React.Component {
         break;
     }
     const data = await response.json();
-    var adverts = data.adverts;
-    var renderCount = this.state.renderCount;
+    let adverts = data.adverts;
+    let renderCount = this.state.renderCount;
     if (loadMore){
       adverts = this.state.adverts.concat(data.adverts);
     } else {
@@ -94,6 +94,7 @@ class Info extends React.Component {
         {this.state.adverts ?
           <div className='vi-flex-nowrap vi-row'>
           <div className='vi-flex-left vi-column' style={{width: '100%'}}>
+          <div style={{overflowY:'scroll'}} ref={(ref) => this.scrollParentRef = ref}>
           <InfiniteScroll
             pageStart={0}
             loadMore={this.loadNextPage}
@@ -111,6 +112,7 @@ class Info extends React.Component {
               ))}
             </Grid>
           </InfiniteScroll>
+          </div>
           </div>
             <FilterView getAdverts={this.getAdverts}/>
           </div>
