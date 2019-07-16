@@ -54,17 +54,18 @@ class Info extends React.Component {
     let response;
     switch (type){
       case 'normal':
-        response = await fetch('http://95.165.154.234:8000/posts', {defaultHeaders});
+        response = await fetch(`http://95.165.154.234:8000/posts${loadMore ? `?last=${loadMore}` : ``}`, {defaultHeaders});
         break;
       case 'search':
         if (this.state.searchQuery){
-          if (this.state.searchQuery.length > 0) response = await fetch(`http://95.165.154.234:8000/posts/search?q=${encodeURIComponent(this.state.searchQuery)}`, {defaultHeaders});
+          if (this.state.searchQuery.length > 0) response = await fetch(`http://95.165.154.234:8000/posts/search?q=${encodeURIComponent(this.state.searchQuery)}
+          ${loadMore ? `&last=${loadMore}` : ``}`, {defaultHeaders});
           else response = await fetch('http://95.165.154.234:8000/posts', {defaultHeaders});
         }
         else response = await fetch('http://95.165.154.234:8000/posts', {defaultHeaders});
         break;
       case 'filter':
-        response = await fetch('http://95.165.154.234:8000/posts/filtered', {method: 'POST', headers: defaultHeaders, body: JSON.stringify(body)});
+        response = await fetch(`http://95.165.154.234:8000/posts/filtered${loadMore ? `?last=${loadMore}` : ``}`, {method: 'POST', headers: defaultHeaders, body: JSON.stringify(body)});
         break;
     }
     const data = await response.json();
