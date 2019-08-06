@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Create from './components/Create';
 import Advert from './components/Advert';
+import Favorites from './components/Favorites';
 import NotFound from './components/NotFound';
 
 class App extends React.Component {
@@ -31,6 +32,7 @@ class App extends React.Component {
             <Route path='/post/:id' component={Advert}/>
             <PrivateRoute path="/profile/" component={(props) => <Profile{...props}setToken={this.onReceiveToken.bind(this)}/>}/>
             <PrivateRoute path='/create/' component={Create}/>
+            <PrivateRoute path='/favorites/' component={Favorites}/>
             <Route path='/login/' render={(props) => <Login{...props}setToken={this.onReceiveToken.bind(this)}/>}/>
             <Route path='/register' component={Register}/>
             <Route component={NotFound}/>

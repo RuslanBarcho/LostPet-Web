@@ -95,7 +95,6 @@ class Info extends React.Component {
         {this.state.adverts ?
           <div className='vi-flex-nowrap vi-row'>
           <div className='vi-flex-left vi-column' style={{width: '100%'}}>
-          <div style={{overflowY:'scroll'}} ref={(ref) => this.scrollParentRef = ref}>
           <InfiniteScroll
             pageStart={0}
             loadMore={this.loadNextPage}
@@ -113,7 +112,6 @@ class Info extends React.Component {
               ))}
             </Grid>
           </InfiniteScroll>
-          </div>
           </div>
             <FilterView getAdverts={this.getAdverts}/>
           </div>
