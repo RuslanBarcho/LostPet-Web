@@ -51,6 +51,7 @@ class FilterView extends React.Component {
     return (
       <MuiThemeProvider theme={myTheme}>
       <div className='vi-flex-left vi-column' style={{minWidth:'200px', paddingRight:'20px'}}>
+        <h2 style={{padding:'0px', marginTop:'20px'}}>Фильтр</h2>
         <FormControl component="fieldset" style={{paddingBottom:'20px'}}>
         <FormLabel component="legend">Тип животного</FormLabel>
           <FormControlLabel
