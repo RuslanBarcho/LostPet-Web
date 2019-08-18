@@ -11,7 +11,7 @@ import toast from 'toasted-notes';
 class Create extends React.Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {selectedFiles: [], fileInputDisabled: false};
     this.handleInputChange = this.handleInputChange.bind(this);
     this.fileChangedHandler = this.fileChangedHandler.bind(this);
   }
@@ -23,8 +23,9 @@ class Create extends React.Component {
   }
 
   fileChangedHandler = event => {
-    this.setState({fileUrl:URL.createObjectURL(event.target.files[0])});
-    this.setState({selectedFile: event.target.files[0]});
+    let file = {fileUrl: URL.createObjectURL(event.target.files[0]), file: event.target.files[0]};
+    this.setState({selectedFiles: this.state.selectedFiles.concat(file)});
+    if (this.state.selectedFiles.length == 2) this.setState({fileInputDisabled: true});
   }
 
   createAdvert = async () =>{
@@ -36,7 +37,9 @@ class Create extends React.Component {
       advertTitle: this.state.title
     }
     const formData = new FormData();
-    formData.append('image0',this.state.selectedFile);
+    this.state.selectedFiles.map((value, index) => {
+      formData.append(`image${index}`, value.file);
+    });
     formData.set('json',JSON.stringify(advert));
     axios.post('http://95.165.154.234:8000/posts/create', formData,{ headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`, 'Content-Type': 'multipart/form-data'}})
     .then(response => {
@@ -72,12 +75,14 @@ class Create extends React.Component {
               </RadioGroup>
             </div>
           </div>
-          <div className='vi-flex-left vi-column'>
+          <div className='vi-flex-left vi-row'>
             <input type="file" ref={(ref) => this.upload = ref} style={{ display: 'none' }} onChange={this.fileChangedHandler}/>
-            <Button variant="contained" onClick={(e) => this.upload.click()} style={{width:'100px', height:'100px'}}><AddIcon/></Button>
-            {this.state.selectedFile ?
-              <div style={{backgroundImage: `url(${this.state.fileUrl})`}} className="vi-card-mini vi-center-crop"></div> :
-            null}
+            <Button variant="contained" onClick={(e) => this.upload.click()} style={{width:'100px', height:'100px', marginRight:'15px'}} disabled={this.state.fileInputDisabled}><AddIcon/></Button>
+              {this.state.selectedFiles.map((value, index) => (
+                <div key={index}>
+                  <div style={{backgroundImage: `url(${value.fileUrl})`}} className="vi-card-mini vi-center-crop"></div>
+                </div>
+              ))}
           </div>
         </div>
         <div className='vi-flex-left vi-row' style={{paddingLeft:'20px'}}>
