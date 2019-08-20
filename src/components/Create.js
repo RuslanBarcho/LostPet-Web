@@ -26,10 +26,13 @@ class Create extends React.Component {
     let file = {fileUrl: URL.createObjectURL(event.target.files[0]), file: event.target.files[0]};
     this.setState({selectedFiles: this.state.selectedFiles.concat(file)});
     if (this.state.selectedFiles.length == 2) this.setState({fileInputDisabled: true});
+    this.upload.value = null;
   }
 
   removeFile = (index) => {
-    this.setState({selectedFiles: this.state.selectedFiles.splice(index, 1)});
+    let arr = this.state.selectedFiles;
+    arr.splice(index, 1);
+    this.setState({selectedFiles: arr, fileInputDisabled: arr.length > 2});
   }
 
   createAdvert = async () =>{
@@ -82,15 +85,15 @@ class Create extends React.Component {
           <div className='vi-flex-left vi-row'>
             <input type="file" ref={(ref) => this.upload = ref} style={{ display: 'none' }} onChange={this.fileChangedHandler}/>
             <Button variant="contained" onClick={(e) => this.upload.click()} style={{width:'100px', height:'100px', marginRight:'15px'}} disabled={this.state.fileInputDisabled}><AddIcon/></Button>
-              {this.state.selectedFiles.map((value, index) => (
-                <div key={index}>
+              {this.state.selectedFiles.map((value, i) => (
+                <div key={i}>
                   <div style={{backgroundImage: `url(${value.fileUrl})`}} className="vi-card-mini vi-center-crop">
                   <div className="vi-box">
-                  <div className="vi-del-img">
+                  <div className="vi-del-img" onClick={this.removeFile.bind(this, i)}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="12" cy="12" r="12" fill="#565656"/>
-<path d="M12 0C18.636 0 24 5.364 24 12C24 18.636 18.636 24 12 24C5.364 24 0 18.636 0 12C0 5.364 5.364 0 12 0ZM16.308 6L12 10.308L7.692 6L6 7.692L10.308 12L6 16.308L7.692 18L12 13.692L16.308 18L18 16.308L13.692 12L18 7.692L16.308 6Z" fill="#D7D9D8"/>
-</svg>
+                    <circle cx="12" cy="12" r="12" fill="#565656"/>
+                      <path d="M12 0C18.636 0 24 5.364 24 12C24 18.636 18.636 24 12 24C5.364 24 0 18.636 0 12C0 5.364 5.364 0 12 0ZM16.308 6L12 10.308L7.692 6L6 7.692L10.308 12L6 16.308L7.692 18L12 13.692L16.308 18L18 16.308L13.692 12L18 7.692L16.308 6Z" fill="#D7D9D8"/>
+                  </svg>
                   </div>
                   </div>
                   </div>
