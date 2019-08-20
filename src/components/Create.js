@@ -28,6 +28,10 @@ class Create extends React.Component {
     if (this.state.selectedFiles.length == 2) this.setState({fileInputDisabled: true});
   }
 
+  removeFile = (index) => {
+    this.setState({selectedFiles: this.state.selectedFiles.splice(index, 1)});
+  }
+
   createAdvert = async () =>{
     const position = 'bottom-left';
     let advert = {
