@@ -25,7 +25,7 @@ class Create extends React.Component {
   fileChangedHandler = event => {
     let file = {fileUrl: URL.createObjectURL(event.target.files[0]), file: event.target.files[0]};
     this.setState({selectedFiles: this.state.selectedFiles.concat(file)});
-    if (this.state.selectedFiles.length == 2) this.setState({fileInputDisabled: true});
+    if (this.state.selectedFiles.length === 2) this.setState({fileInputDisabled: true});
     this.upload.value = null;
   }
 

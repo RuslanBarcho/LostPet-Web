@@ -6,7 +6,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from "react-router-dom";
 import FilterView from './views/FilterView';
-import {MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import InfiniteScroll from 'react-infinite-scroller';
 
@@ -52,20 +52,22 @@ class Info extends React.Component {
 
   getAdverts = async (type, body, loadMore) => {
     let response;
+    let lastItem;
+    if (this.state.adverts) lastItem = this.state.adverts[this.state.adverts.length - 1];
     switch (type){
       case 'normal':
-        response = await fetch(`http://95.165.154.234:8000/posts${loadMore ? `?last=${loadMore}` : ``}`, {defaultHeaders});
+        response = await fetch(`http://95.165.154.234:8000/posts${loadMore ? `?last=${lastItem._id}` : ``}`, {defaultHeaders});
         break;
       case 'search':
         if (this.state.searchQuery){
           if (this.state.searchQuery.length > 0) response = await fetch(`http://95.165.154.234:8000/posts/search?q=${encodeURIComponent(this.state.searchQuery)}
-          ${loadMore ? `&last=${loadMore}` : ``}`, {defaultHeaders});
+          ${loadMore ? `&last=${lastItem._id}` : ``}`, {defaultHeaders});
           else response = await fetch('http://95.165.154.234:8000/posts', {defaultHeaders});
         }
         else response = await fetch('http://95.165.154.234:8000/posts', {defaultHeaders});
         break;
       case 'filter':
-        response = await fetch(`http://95.165.154.234:8000/posts/filtered${loadMore ? `?last=${loadMore}` : ``}`, {method: 'POST', headers: defaultHeaders, body: JSON.stringify(body)});
+        response = await fetch(`http://95.165.154.234:8000/posts/filtered${loadMore ? `?last=${lastItem._id}` : ``}`, {method: 'POST', headers: defaultHeaders, body: JSON.stringify(body)});
         break;
     }
     const data = await response.json();
@@ -76,7 +78,7 @@ class Info extends React.Component {
     } else {
       renderCount += 1;
     }
-    this.setState({adverts: adverts, count:data.count, hasMore: adverts.length < data.count.length,
+    this.setState({adverts: adverts, count:data.count, hasMore: adverts.length < data.count,
       lastRequest: {type: type, reqData: body}, renderCount: renderCount
     });
   }
