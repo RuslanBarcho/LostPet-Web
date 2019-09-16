@@ -222,6 +222,14 @@ ul{
   background: linear-gradient(to right, #F6BE6B, #F3A97F);
 }
 
+.vi-iconified-button{
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  align-content: stretch;
+  padding: 10px;
+}
+
 .vi-description {
   width: 400px
 }

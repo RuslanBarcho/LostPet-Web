@@ -10,12 +10,6 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import InfiniteScroll from 'react-infinite-scroller';
 
-const myTheme = createMuiTheme({
-  palette: {
-    primary: {main: '#17193D'},
-    secondary: {main: '#F4AC5B'}}
-});
-
 const defaultHeaders = {'Content-Type': 'application/json'};
 
 class Info extends React.Component {

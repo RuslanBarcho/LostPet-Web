@@ -2,6 +2,7 @@ import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ImageView from './views/ImageView';
 import Button from "@material-ui/core/Button";
+import AdvertActionButton from './views/AdvertActionButton'
 
 class Advert extends React.Component {
 
@@ -26,10 +27,13 @@ class Advert extends React.Component {
     let apiUrl = await fetch(url, {headers});
     const data = await apiUrl.json();
     if (data.owner){
-      this.setState({
+      let state = {
         content: data,
-        displayPhone: 'Показать телефон'
-      });
+        displayPhone: 'Показать телефон',
+        advertMode: 'favorite-add'
+      }
+      if (data.isFavorite) state.advertMode = 'favorite-delete';
+      this.setState(state);
     }
   }
 
